@@ -94,7 +94,7 @@ def IsAppIDCorrectVersion(appid: int, version: int, srcds: (subprocess.Popen | N
             # We will force an update in the following scenarios:
             # - We are launching the server on Windows (as -autoupdate is not available)
             # - The server is already running but the game has been updated
-            required_version = (content["required_version"] if ("required_version" in content) else -1);
+            required_version = (content["response"]["required_version"] if ("required_version" in content["response"]) else -1);
             print(f"srcds manager: server requested restart for appID {appid} (current version is {version} while expected version is {required_version})");
 
             # Find the steamcmd executable and launch the update script.
@@ -205,8 +205,8 @@ def main(argc: int, argv: list[str]) -> int:
                     skipexit = True;
         
         # Check if it crashed.
-        if (exitcode != 0x100000000):
-            print("srcds manager: *WARNING* SERVER CRASHED! (exit code 0x{exitcode:08X})", file = sys.stderr);
+        if (exitcode != 0x100000000 and not skipexit):
+            print(f"srcds manager: *WARNING* SERVER CRASHED! (exit code 0x{exitcode:08X})", file = sys.stderr);
     
     print(f"srcds manager: server closed with exit code 0x{exitcode:08X}");
     return 0;
