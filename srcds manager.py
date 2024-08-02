@@ -164,7 +164,7 @@ def main(argc: int, argv: list[str]) -> int:
         return 1;
     elif (not os.path.isfile(g_strSteamCMDScript)):
         if (len(g_strSteamCMDScript) == 0):
-            print("Could not find valid -steam_dir parameter.", file = sys.stderr);
+            print("Could not find valid -steamcmd_script parameter.", file = sys.stderr);
         else:
             print(f"-steamcmd_script parameter is invalid (points to incorrect file \"{g_strSteamCMDScript}\")", file = sys.stderr);
         return 1;
