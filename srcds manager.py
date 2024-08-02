@@ -122,8 +122,8 @@ def server_thread(process: subprocess.Popen, parser: InfParser, inf: str) -> Non
 
         # Re-read steam.inf and check for an update. If an update occurs,
         # end this thread.
-        time = time.strftime("%H:%M:%S", time.localtime());
-        print(f"[{time}] srcds manager: Checking for update...");
+        timestamp = time.strftime("%H:%M:%S", time.localtime());
+        print(f"[{timestamp}] srcds manager: Checking for update...");
         parser.Clear();
         parser.Read(inf);
         if (not IsAppIDCorrectVersion(parser["appID"], parser["ServerVersion"], process)):
