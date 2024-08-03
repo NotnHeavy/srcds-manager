@@ -203,6 +203,7 @@ def main(argc: int, argv: list[str]) -> int:
                     process.kill();
                     thread.join();
                     skipexit = True;
+                time.sleep(0.05);
         
         # Check if it crashed.
         if (exitcode != 0x100000000 and not skipexit):
