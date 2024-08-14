@@ -3,6 +3,7 @@
 ##############################################################################
 
 # This is my first Python script using threads...
+# 2024.08.14: i should've used argparse....
 
 # TODO: prerelease support?
 
@@ -126,8 +127,11 @@ def server_thread(process: subprocess.Popen, parser: InfParser, inf: str) -> Non
         print(f"[{timestamp}] srcds manager: Checking for update...");
         parser.Clear();
         parser.Read(inf);
-        if (not IsAppIDCorrectVersion(parser["appID"], parser["ServerVersion"], process)):
-            return;
+        try:
+            if (not IsAppIDCorrectVersion(parser["appID"], parser["ServerVersion"], process)):
+                return;
+        except Exception as ex:
+            print(f"srcds manager: *WARNING* EXCEPTION CAUGHT\n{type(ex).__name__}:, {ex}");
 
 ##############################################################################
 ## ENTRY POINT                                                              ##
